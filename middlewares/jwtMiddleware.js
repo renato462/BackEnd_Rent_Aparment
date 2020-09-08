@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { JWT_KEY } = require("../config/index");
 
-const checkJWT = (req, res, next) => {
+exports.checkJWT = (req, res, next) => {
   const token = req.header("x-token");
 
   if (!token) {
