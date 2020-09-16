@@ -13,6 +13,8 @@ exports.checkJWT = (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, JWT_KEY);
+    req.uid = id;
+    
     next();
   } catch (error) {
     return res.status(401).json({

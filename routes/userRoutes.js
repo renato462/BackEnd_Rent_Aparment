@@ -16,7 +16,7 @@ router.get( '/users', userController.getUsers);
 
 router.post( '/user',
     [
-        check('userName', 'El Usuario es obligatorio').not().isEmpty(),
+        //check('userName', 'El Usuario es obligatorio').not().isEmpty(),
         check('name', 'El nombre es obligatorio').not().isEmpty(),
         check('lastName', 'El apellido es obligatorio').not().isEmpty(),
         check('email', 'El email es obligatorio').isEmail(),

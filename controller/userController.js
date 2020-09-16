@@ -143,11 +143,10 @@ exports.deleteUser = async(req, res = response ) => {
         }
 
         await User.findByIdAndDelete( uid );
-
         
         res.json({
+            msg: 'Usuario eliminado',
             ok: true,
-            msg: 'Usuario eliminado'
         });
 
     } catch (error) {
