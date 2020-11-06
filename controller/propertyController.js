@@ -7,7 +7,7 @@ exports.getProperties = async (req, res, next) => {
     const properties = await Property.find();
     res.status(200).json({
       ok: true,
-      message: "Departamento Creado",
+      message: "Se enviaron todos los departamentos",
       properties,
     });
   } catch (error) {
@@ -39,15 +39,14 @@ exports.createProperty = async (req, res, next) => {
 exports.updateProperty = async (req, res, next) => {
     const propertyId = req.params.propertyId;
     
-    const token = await generateJWT(propertyId);
-    console.log(token);
+    // const token = await generateJWT(propertyId);
+    // console.log(token);
 
     try {
         const updateProperty = await Property.findByIdAndUpdate(propertyId, req.body,{new: true});
         res.status(200).json({
             ok: true,
             updateProperty,
-            token
         });
     } catch (error) {
         res.status(500).json({

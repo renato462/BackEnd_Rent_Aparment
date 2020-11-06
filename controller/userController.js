@@ -43,7 +43,7 @@ exports.addUser = async(req, res = response) => {
         }
 
         const user = new User( req.body );
-    
+        
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync( password, salt );
@@ -53,7 +53,7 @@ exports.addUser = async(req, res = response) => {
         await user.save();
 
         // Generar el TOKEN - JWT
-        const token = await generateJWT( user.id );
+        const token = await generateJWT( user.id, user.email, user.name);
 
 
         res.json({

@@ -24,16 +24,16 @@ exports.login = async( req, res = response ) => {
 
         // Verificar contraseña
         const validPassword = bcrypt.compareSync( password, usuarioDB.password);
-// 
+        // 
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,
                 msg: 'Contraseña no válida'
             });
         }
-
+        console.log(usuarioDB);
         // Generar el TOKEN - JWT
-        const token = await generateJWT( usuarioDB.id);
+        const token = await generateJWT( usuarioDB.id, usuarioDB.email, usuarioDB.name);
 
 
         res.json({
