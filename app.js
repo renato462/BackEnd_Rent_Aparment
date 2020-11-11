@@ -5,7 +5,8 @@ const propertyRoutes = require('./routes/propertyRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
 const uploadRoutes = require('./routes/uploadRoutes');
-const aparmentRoutes = require('./routes/aparmentRoutes')
+const aparmentRoutes = require('./routes/aparmentRoutes');
+const clientRoutes = require('./routes/clientRoutes');
 const cors = require('cors');
 const morgan = require('morgan');
 
@@ -34,6 +35,7 @@ app.use('/api',userRoutes);
 app.use('/api/login',authRoutes);
 app.use('/api/upload',uploadRoutes);
 app.use('/api', aparmentRoutes);
+app.use('/api', clientRoutes);
 
 app.listen( process.env.PORT, () => {
     console.log('Servidor corriendo en puerto ' + process.env.PORT );
