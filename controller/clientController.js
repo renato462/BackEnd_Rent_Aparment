@@ -35,7 +35,7 @@ exports.getClients = (req, res, next) => {
 
 exports.createClient = async (req, res, next) => {
   try {
-    const client = Client.create({ ...req.body });
+    const client = await Client.create({ ...req.body });
     res.status(200).json({
       ok: true,
       msg,

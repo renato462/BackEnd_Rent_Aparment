@@ -11,17 +11,36 @@ const clientSchema = new Schema(
     typeDocument: {
       type: String,
       required: true,
-      default: "DNI"
+      default: "DNI",
     },
     numberDocument: {
       type: String,
       required: true,
     },
-    adress: { type:String, maxlength:70},
-    phone: { type:String, maxlength:20},
-    email: { type:String, maxlength:50, unique:true},
-    status: { type:Number, default:1},
-   
+    adress: { type: String, maxlength: 70, require: true },
+
+    region: {
+      code: { type: String, require: true },
+      name: { type: String, require: true },
+    },
+    provincie: {
+      code: { type: String, require: true },
+      name: { type: String, require: true },
+    },
+    district: {
+      code: { type: String, require: true },
+      name: { type: String, require: true },
+    },
+    // regionCode: { type: String, require: true },
+    // regionName: { type: String, require: true },
+    // provincieCode: { type: String, require: true },
+    // ProvinceName: { type: String, require: true },
+    // districtCode: { type: String, require: true },
+    // districtName: { type: String, require: true },
+
+    phone: { type: String, maxlength: 20 },
+    email: { type: String, maxlength: 50, unique: true },
+    status: { type: Number, default: 1 },
   },
   {
     timestamps: true,
@@ -36,7 +55,7 @@ module.exports = mongoose.model("Client", clientSchema);
 //     nombre: { type:String,maxlength:50, unique:true, required:true},
 //     tipo_documento: { type:String,maxlength:20},
 //     num_documento: { type:String,maxlength:20},
-    
+
 // 	createdAt: { type: Date, default: Date.now }
 // });
 
