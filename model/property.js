@@ -10,6 +10,18 @@ const propertySchema = new Schema({
     type: String,
     required: true,
   },
+  region: {
+    code: { type: String, require: true },
+    name: { type: String, require: true },
+  },
+  provincie: {
+    code: { type: String, require: true },
+    name: { type: String, require: true },
+  },
+  district: {
+    code: { type: String, require: true },
+    name: { type: String, require: true },
+  },
   //UserId: { type: Schema.Types.ObjectID, ref: "User", required: true },
 });
 

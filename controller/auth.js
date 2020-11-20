@@ -33,7 +33,7 @@ exports.login = async( req, res = response ) => {
         }
         console.log(usuarioDB);
         // Generar el TOKEN - JWT
-        const token = await generateJWT( usuarioDB.id, usuarioDB.email, usuarioDB.name);
+        const token = await generateJWT( usuarioDB.id, usuarioDB.email, usuarioDB.name, usuarioDB.img);
 
 
         res.json({
@@ -52,39 +52,32 @@ exports.login = async( req, res = response ) => {
 
 
 exports.googleSignIn = async( req, res = response ) => {
-
     const googleToken = req.body.token;
-  
-
     try {
-        
-        const { name, email, picture } = await googleVerify( googleToken );
-
+        const { name, given_name, family_name, email, picture  } = await googleVerify( googleToken );
         const usuarioDB = await User.findOne({ email });
         let usuario;
 
         if ( !usuarioDB ) {
             // si no existe el usuario
             usuario = new User({
-                nombre: name,
+                name: given_name,
+                lastName: family_name,
                 email,
                 password: '@@@',
                 img: picture,
                 google: true
             });
         } else {
-            // existe usuario
-           
+            // existe usuario  
             usuario = usuarioDB;
             usuario.google = true;
-        }
-
-        
+        }   
         // Guardar en DB
         await usuario.save();
-
+        
         // Generar el TOKEN - JWT
-        const token = await generateJWT( usuario.id );
+        const token = await generateJWT( usuario.id, usuario.email, usuario.name, usuario.img);
         
         res.json({
             ok: true,

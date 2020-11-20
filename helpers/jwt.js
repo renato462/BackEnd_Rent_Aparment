@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 const {JWT_KEY} = require('../config/index');
 
-exports.generateJWT = (id,email,name) => {
+exports.generateJWT = (id,email,name,img) => {
     return new Promise((resolve, reject) => {
         const payload = {
             id: id,
             email: email,
-            name: name
+            name: name,
+            img:img
         };
     
         jwt.sign(payload, JWT_KEY,{

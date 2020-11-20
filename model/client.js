@@ -37,9 +37,9 @@ const clientSchema = new Schema(
     // ProvinceName: { type: String, require: true },
     // districtCode: { type: String, require: true },
     // districtName: { type: String, require: true },
-
+    contact:{type: String, require:true},
     phone: { type: String, maxlength: 20 },
-    email: { type: String, maxlength: 50, unique: true },
+    email: { type: String, maxlength: 50 },
     status: { type: Number, default: 1 },
   },
   {
