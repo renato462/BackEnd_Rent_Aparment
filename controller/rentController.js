@@ -1,15 +1,23 @@
-const Property = require("../model/property");
+const Rent = require("../model/rent");
 const { validationResult } = require("express-validator");
 const { generateJWT } = require( "../helpers/jwt" );
 
-exports.getProperties = async (req, res, next) => {
+exports.getRents = async (req, res, next) => {
   try {
-    const properties = await Property.find();
+    const rents = await Rent.find()
+    .populate("clientId")
+    .populate(({
+      path : 'aparmentId',
+      populate : {
+        path : 'propertyId'
+      }
+    })
+  );
    
     res.status(200).json({
       ok: true,
-      message: "Se enviaron todos los departamentos",
-      properties,
+      message: "Se enviaron todos los items",
+      rents,
     });
   } catch (error) {
     res.status(500).json({
@@ -19,14 +27,14 @@ exports.getProperties = async (req, res, next) => {
   }
 };
 
-exports.createProperty = async (req, res, next) => {
+exports.createRent = async (req, res, next) => {
 
   try {
-    const property = new Property(req.body);
-    await property.save();
+    const rent = new Rent(req.body);
+    await rent.save();
     res.status(200).json({
       ok: true,
-      property,
+      rent,
     });
   } catch (error) {
     res.status(500).json({
@@ -37,17 +45,17 @@ exports.createProperty = async (req, res, next) => {
 };
 
 
-exports.updateProperty = async (req, res, next) => {
-    const propertyId = req.params.propertyId;
+exports.updateRent = async (req, res, next) => {
+    const rentId = req.params.rentId;
     
-    // const token = await generateJWT(propertyId);
+    // const token = await generateJWT(rentId);
     // console.log(token);
 
     try {
-        const updateProperty = await Property.findByIdAndUpdate(propertyId, req.body,{new: true});
+        const updateRent = await Rent.findByIdAndUpdate(rentId, req.body,{new: true});
         res.status(200).json({
             ok: true,
-            updateProperty,
+            updateRent,
         });
     } catch (error) {
         res.status(500).json({
@@ -58,14 +66,14 @@ exports.updateProperty = async (req, res, next) => {
       }
 };
 
-exports.deleteProperty = async (req, res, next) => {
-  const propertyId = req.params.propertyId;
+exports.deleteRent = async (req, res, next) => {
+  const rentId = req.params.rentId;
   
   try {
-      const deleteProperty = await Property.findByIdAndDelete(propertyId);
+      const deleteRent = await Rent.findByIdAndDelete(rentId);
       res.status(200).json({
         ok: true,
-        deleteProperty
+        deleteRent
     });
   } catch (error) {
     res.status(500).json({
