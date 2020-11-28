@@ -8,6 +8,7 @@ const aparmentController = require("../controller/aparmentController");
 const router = express.Router();
 
 router.get("/aparments", aparmentController.getApaments);
+router.get("/aparmentsFilter", aparmentController.getAparmentFilter);
 
 router.get("/aparment/:aparmentId", aparmentController.getAparment);
 

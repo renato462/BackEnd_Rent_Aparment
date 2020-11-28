@@ -11,12 +11,11 @@ router.get("/payments", checkJWT, itemController.getItems);
 router.post("/payment",
   [
     checkJWT,
-    check("startDate", "Campo obligatorio").not().isEmpty(),
     errorsResponse,
   ], itemController.createItem
 );
 
-router.put("/rent/:rentId", [
+router.put("/payment/:itemId", [
   errorsResponse, checkJWT
 ], itemController.updateItem);
 

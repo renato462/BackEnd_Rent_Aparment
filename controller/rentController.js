@@ -13,7 +13,7 @@ exports.getRents = async (req, res, next) => {
       }
     })
   );
-   
+
     res.status(200).json({
       ok: true,
       message: "Se enviaron todos los items",
@@ -64,6 +64,34 @@ exports.updateRent = async (req, res, next) => {
           
         });
       }
+};
+exports.getRent = async (req, res, next) => {
+  const rentId = req.params.rentId;
+
+  try {
+    const rent = await Rent.findById(rentId)
+    .populate("clientId")
+    .populate(({
+      path : 'aparmentId',
+      populate : {
+        path : 'propertyId'
+      }
+    })
+    );
+
+    
+    res.status(200).json({
+      ok: true,
+      rent
+    });
+
+  }
+  catch (error) {
+    res.status(400).json({
+      ok: false,
+      msg: "Error Inesperado" + error
+    });
+  }
 };
 
 exports.deleteRent = async (req, res, next) => {

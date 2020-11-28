@@ -42,6 +42,10 @@ const paymentSchema = new Schema(
         type:Date, 
         required: true
     },
+    status: { 
+        type:String, 
+        required: true
+    },
     rentId: {
       type: Schema.Types.ObjectId,
       ref: "rent",

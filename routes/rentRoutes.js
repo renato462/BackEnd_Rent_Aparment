@@ -8,6 +8,7 @@ const rentController = require("../controller/rentController");
 const router = express.Router();
 
 router.get("/rents", checkJWT, rentController.getRents);
+router.get("/rent_one/:rentId", checkJWT, rentController.getRent);
 router.post("/rent",
   [
     checkJWT,
