@@ -38,8 +38,9 @@ const aparment = require("../model/aparment");
 
 exports.getAparmentFilter = (req, res, next) => {
   let rents;
-  let aparmentsArray = [];
-  Rent.find()
+  let aparmentsArray = [];  
+
+  Rent.find({"status":{$ne:"Contrato Cerrado"}})
     .then((renta) => {
       rents = renta;
       return Aparment.find();

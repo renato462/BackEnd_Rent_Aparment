@@ -26,7 +26,7 @@ const rentSchema = new Schema(
     status: {
       type: String,
       required: true,
-      default: "PENDING",
+      default: "Contrato Vigente",
     },
     paymentId:[{
         type: Schema.Types.ObjectId,

@@ -11,6 +11,8 @@ const rentRoutes = require('./routes/rentRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const cors = require('cors');
 const morgan = require('morgan');
+const CronJob = require('cron').CronJob;
+const freeAparment = require('./controller/dashboardController')
 
 // Crear el servidor de express
 const app = express();
@@ -44,3 +46,13 @@ app.use('/api', paymentRoutes);
 app.listen( process.env.PORT, () => {
     console.log('Servidor corriendo en puerto ' + process.env.PORT );
 });
+
+
+
+
+// console.log('Before job instantiation');
+// const job = new CronJob('* * * * * *', function() {
+// 	freeAparment.freeAparment();
+// });
+// console.log('After job instantiation');
+// job.start();
